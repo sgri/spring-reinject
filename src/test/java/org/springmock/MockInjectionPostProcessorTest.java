@@ -13,6 +13,11 @@ import org.testng.annotations.Test;
 @ContextConfiguration(classes = {MockedServicesConfiguration.class})
 public class MockInjectionPostProcessorTest extends AbstractTestNGSpringContextTests{
     @Inject private Service service;
+
+    public MockInjectionPostProcessorTest() {
+        MockInjectionPostProcessor.injectBean("service", MockedService.class);
+    }
+
     @Test
     public void injection() {
         AssertJUnit.assertEquals("mocked", service.hello());
