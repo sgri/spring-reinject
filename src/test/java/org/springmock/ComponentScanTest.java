@@ -11,10 +11,10 @@ import org.testng.annotations.Test;
  * @author Sergey Grigoriev
  */
 @ContextConfiguration(classes = {MockedServicesConfiguration.class})
-public class MockInjectionPostProcessorTest extends AbstractTestNGSpringContextTests{
+public class ComponentScanTest extends AbstractTestNGSpringContextTests{
     @Inject private Service service;
 
-    public MockInjectionPostProcessorTest() {
+    public ComponentScanTest() {
         MockInjectionPostProcessor.injectBean("serviceImpl", MockedService1.class);
     }
 
