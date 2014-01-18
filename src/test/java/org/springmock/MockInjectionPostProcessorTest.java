@@ -15,11 +15,11 @@ public class MockInjectionPostProcessorTest extends AbstractTestNGSpringContextT
     @Inject private Service service;
 
     public MockInjectionPostProcessorTest() {
-        MockInjectionPostProcessor.injectBean("service", MockedService.class);
+        MockInjectionPostProcessor.injectBean("serviceImpl", MockedService1.class);
     }
 
     @Test
     public void injection() {
-        AssertJUnit.assertEquals("mocked", service.hello());
+        AssertJUnit.assertEquals("mock1", service.hello());
     }
 }
