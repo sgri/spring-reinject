@@ -32,6 +32,11 @@ public class JavaConfigTest extends AbstractTestNGSpringContextTests {
              return new MockInjectionPostProcessor();
         }
 
+        @Bean public Object dependent() {
+            assertEquals("mock1", service().hello());
+            return new Object();
+        }
+
         @Bean
         public Service service() {
             return new ServiceImpl();
