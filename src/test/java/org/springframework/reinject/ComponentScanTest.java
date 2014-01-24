@@ -1,4 +1,4 @@
-package org.springmock;
+package org.springframework.reinject;
 
 import javax.inject.Inject;
 

@@ -1,4 +1,4 @@
-package org.springmock;
+package org.springframework.reinject;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -23,7 +23,6 @@ public class MockInjectionPostProcessor implements BeanFactoryPostProcessor, Dis
     public static void injectBean(String name, Class clazz) {
         mocksByName.put(name, clazz);
     }
-
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
