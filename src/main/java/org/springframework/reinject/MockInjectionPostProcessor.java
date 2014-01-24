@@ -3,6 +3,8 @@ package org.springframework.reinject;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.inject.Provider;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -19,9 +21,14 @@ import org.springframework.stereotype.Component;
 public class MockInjectionPostProcessor implements BeanFactoryPostProcessor, DisposableBean {
     private static MockInjectionPostProcessor instance;
     private static final Map<String, Class> mocksByName = new LinkedHashMap<>();
+    private static final Map<String, Provider> providersByName = new LinkedHashMap<>();
 
     public static void inject(String name, Class clazz) {
         mocksByName.put(name, clazz);
+    }
+
+    public static <T> void inject(String name, Provider<T> provider) {
+        providersByName.put(name, provider);
     }
 
     @Override
