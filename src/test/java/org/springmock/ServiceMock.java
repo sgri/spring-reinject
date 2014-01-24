@@ -3,10 +3,9 @@ package org.springmock;
 /**
  * @author Sergey Grigoriev
  */
-public class MockedService2 implements Service {
+public class ServiceMock extends ServiceImpl {
     @Override
     public String hello() {
-        return "mock2";
+        return "mock1";
     }
-
 }

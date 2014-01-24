@@ -17,7 +17,7 @@ public class ComponentScanTest extends AbstractTestNGSpringContextTests{
     @Inject private Service service;
 
     public ComponentScanTest() {
-        MockInjectionPostProcessor.injectBean("serviceImpl", MockedService1.class);
+        MockInjectionPostProcessor.injectBean("service", ServiceMock.class);
     }
 
     @Test

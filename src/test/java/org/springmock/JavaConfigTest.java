@@ -1,5 +1,9 @@
 package org.springmock;
 
+import static org.testng.AssertJUnit.assertEquals;
+
+import javax.inject.Inject;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,9 +15,14 @@ import org.testng.annotations.Test;
  */
 @ContextConfiguration(classes = {JavaConfigTest.AppContext.class})
 public class JavaConfigTest extends AbstractTestNGSpringContextTests {
+    @Inject private Service service;
+    public JavaConfigTest() {
+        MockInjectionPostProcessor.injectBean("service", ServiceMock.class);
+    }
+
     @Test
     public void inject() {
-
+        assertEquals("mock1", service.hello());
     }
 
     @Configuration
