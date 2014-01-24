@@ -26,7 +26,7 @@ public class ComponentScanTest extends AbstractTestNGSpringContextTests{
     }
 
     @Configuration
-    @ComponentScan(basePackages = "org.springmock")
+    @ComponentScan(basePackages = "org.springframework.reinject")
     static class AppContext {
 
     }
