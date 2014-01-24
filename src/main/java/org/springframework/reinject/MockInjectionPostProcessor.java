@@ -20,7 +20,7 @@ public class MockInjectionPostProcessor implements BeanFactoryPostProcessor, Dis
     private static MockInjectionPostProcessor instance;
     private static final Map<String, Class> mocksByName = new LinkedHashMap<>();
 
-    public static void injectBean(String name, Class clazz) {
+    public static void inject(String name, Class clazz) {
         mocksByName.put(name, clazz);
     }
 
