@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * @author Sergey Grigoriev
  */
-@ContextConfiguration(classes = {JavaConfigTest.AppContext.class})
+@ContextConfiguration(classes = {ReInjectContext.class, JavaConfigTest.AppContext.class})
 public class JavaConfigTest extends AbstractTestNGSpringContextTests {
     @Inject private Service service;
     public JavaConfigTest() {
@@ -22,18 +22,14 @@ public class JavaConfigTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void inject() {
-        assertEquals("mock1", service.hello());
+        assertEquals("goodbye!", service.hello());
     }
 
     @Configuration
     static class AppContext {
-        @Bean
-        public MockInjectionPostProcessor mockInjectionPostProcessor() {
-             return new MockInjectionPostProcessor();
-        }
 
         @Bean public Object dependent() {
-            assertEquals("mock1", service().hello());
+            assertEquals("goodbye!", service().hello());
             return new Object();
         }
 

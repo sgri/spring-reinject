@@ -6,6 +6,6 @@ package org.springframework.reinject;
 public class ServiceMock extends ServiceImpl {
     @Override
     public String hello() {
-        return "mock1";
+        return "goodbye!";
     }
 }

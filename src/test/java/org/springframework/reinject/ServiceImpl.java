@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 @Component("service")
 public class ServiceImpl implements Service {
     public String hello() {
-        return "original";
+        return "hello!";
     }
 }

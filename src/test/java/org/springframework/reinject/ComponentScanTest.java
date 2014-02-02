@@ -22,7 +22,7 @@ public class ComponentScanTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void injection() {
-        AssertJUnit.assertEquals("mock1", service.hello());
+        AssertJUnit.assertEquals("goodbye!", service.hello());
     }
 
     @Configuration
