@@ -40,8 +40,10 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor, Disposab
      * @param object   bean instance
      */
     public static void inject(String name, Class beanType, Object object) {
-        if (beanType.isAssignableFrom(object.getClass()))
-            objectsByName.put(name, object);
+        if (!beanType.isAssignableFrom(object.getClass())) {
+            throw new IllegalArgumentException(String.format("%s is not assignable form %s", beanType.getClass().getName(), object.getClass().getName()));
+        }
+        objectsByName.put(name, object);
         ConstructorArgumentValues constructorArgumentValues = new ConstructorArgumentValues();
         constructorArgumentValues.addGenericArgumentValue(object);
         constructorArgumentValues.addGenericArgumentValue(beanType);
