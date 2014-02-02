@@ -1,20 +1,24 @@
 package org.springframework.reinject;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.inject.Inject;
 
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.AssertJUnit;
-import org.testng.annotations.Test;
 
 /**
  * @author Sergey Grigoriev
  */
 
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/org/springframework/reinject/app-context.xml")
-public class XmlConfigTest extends AbstractTestNGSpringContextTests {
+public class XmlConfigTest  {
     @Inject private Printer printer;
 
     public XmlConfigTest() {
@@ -27,7 +31,7 @@ public class XmlConfigTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void inject() {
-        AssertJUnit.assertEquals("easyMock", printer.print());
+        assertEquals("easyMock", printer.print());
     }
 
 }

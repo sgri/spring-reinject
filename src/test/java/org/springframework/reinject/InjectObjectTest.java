@@ -1,21 +1,26 @@
 package org.springframework.reinject;
 
 
+import static org.junit.Assert.assertEquals;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.AssertJUnit;
-import org.testng.annotations.Test;
 
 /**
  * @author Sergey Grigoriev
  */
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ReInjectContext.class, InjectObjectTest.ProviderTestContext.class})
-public class InjectObjectTest extends AbstractTestNGSpringContextTests {
+public class InjectObjectTest  {
 
     @Inject @Named("service1") private Service service1;
     @Inject @Named("service2") private Service service2;
@@ -37,8 +42,8 @@ public class InjectObjectTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void overrideProvider() {
-        AssertJUnit.assertEquals("hello1", service1.hello());
-        AssertJUnit.assertEquals("hello2", service2.hello());
+        assertEquals("hello1", service1.hello());
+        assertEquals("hello2", service2.hello());
     }
 
     static class ProviderTestContext {

@@ -1,20 +1,23 @@
 package org.springframework.reinject;
 
-import static org.testng.AssertJUnit.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import javax.inject.Inject;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.Test;
 
 /**
  * @author Sergey Grigoriev
  */
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ReInjectContext.class, JavaConfigTest.AppContext.class})
-public class JavaConfigTest extends AbstractTestNGSpringContextTests {
+public class JavaConfigTest  {
     @Inject private Service service;
     public JavaConfigTest() {
         ReInjectPostProcessor.inject("service", ServiceMock.class);
