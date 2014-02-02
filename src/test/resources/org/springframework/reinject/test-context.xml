@@ -4,7 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="service"  class="org.springframework.reinject.ServiceImpl"/>
-    <bean id="printer" class="org.springframework.reinject.Printer"/>
+    <bean class="org.springframework.reinject.ReInjectPostProcessor"/>
 </beans>
 

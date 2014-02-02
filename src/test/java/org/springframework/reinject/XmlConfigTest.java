@@ -10,14 +10,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 /**
  * @author Sergey Grigoriev
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:/org/springframework/reinject/app-context.xml")
+@ContextConfiguration(locations = {"classpath:/org/springframework/reinject/app-context.xml", "classpath:/org/springframework/reinject/test-context.xml"})
 public class XmlConfigTest  {
     @Inject private Printer printer;
 
@@ -33,5 +32,7 @@ public class XmlConfigTest  {
     public void inject() {
         assertEquals("easyMock", printer.print());
     }
+
+
 
 }
