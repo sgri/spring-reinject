@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.springframework</groupId>
+    <version>0.1</version>
+    <artifactId>spring-reinject-github</artifactId>
+    <name>Test integration with GitHub repo</name>
+    <repositories>
+        <repository>
+            <id>reinject</id>
+            <name>reinject</name>
+            <url>https://github.com/sgri/reinject/raw/master/release</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </repository>
+    </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>reinject</artifactId>
+            <version>0.1</version>
+        </dependency>
+    </dependencies>
+
+</project>
