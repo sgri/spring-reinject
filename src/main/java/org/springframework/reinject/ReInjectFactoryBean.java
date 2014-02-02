@@ -5,7 +5,7 @@ import org.springframework.beans.factory.FactoryBean;
 /**
  * @author Sergey Grigoriev
  */
-public class ReInjectFactoryBean implements FactoryBean {
+class ReInjectFactoryBean implements FactoryBean {
     private final Object object;
     private final Class objectType;
 

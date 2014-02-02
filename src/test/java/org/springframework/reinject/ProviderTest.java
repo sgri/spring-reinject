@@ -27,7 +27,7 @@ public class ProviderTest extends AbstractTestNGSpringContextTests {
                 return "hello1";
             }
         });
-        ReInjectPostProcessor.inject("service2",Service.class, new ServiceMock() {
+        ReInjectPostProcessor.inject("service2", new ServiceMock() {
             @Override
             public String hello() {
                 return "hello2";

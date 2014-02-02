@@ -22,16 +22,35 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor, Disposab
     private static final Map<String, Object> objectsByName = new LinkedHashMap<>();
     private static final Map<String, ConstructorArgumentValues> constructorArgsMap = new LinkedHashMap<>();
 
+    /**
+     * Replace a bean definition with a another class
+     * @param name bean id
+     * @param clazz new class which replaces the original bean definition class
+     */
     public static void inject(String name, Class clazz) {
         mocksByName.put(name, clazz);
     }
 
-    public static <T> void inject(String name, Class ifc, Object object) {
+    /**
+     * Replace a bean definition with a factory bean which returns a pre-instantiated object
+     * @param name bean id
+     * @param beanType object type, see {@linkplain org.springframework.beans.factory.FactoryBean#getObjectType()}
+     * @param object bean instance
+     */
+    public static void inject(String name, Class  beanType, Object object) {
+        if (beanType.isAssignableFrom(object.getClass()))
         objectsByName.put(name, object);
         ConstructorArgumentValues constructorArgumentValues = new ConstructorArgumentValues();
         constructorArgumentValues.addGenericArgumentValue(object);
-        constructorArgumentValues.addGenericArgumentValue(ifc);
+        constructorArgumentValues.addGenericArgumentValue(beanType);
         constructorArgsMap.put(name, constructorArgumentValues);
+    }
+
+    /**
+     * See {@linkplain #inject(String, Class, Object)}
+     */
+    public static void inject(String name, Object object) {
+        inject(name, object.getClass(), object);
     }
 
     @Override
