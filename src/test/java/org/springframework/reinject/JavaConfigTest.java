@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 public class JavaConfigTest extends AbstractTestNGSpringContextTests {
     @Inject private Service service;
     public JavaConfigTest() {
-        MockInjectionPostProcessor.inject("service", ServiceMock.class);
+        ReInjectPostProcessor.inject("service", ServiceMock.class);
     }
 
     @Test

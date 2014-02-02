@@ -2,7 +2,6 @@ package org.springframework.reinject;
 
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +19,7 @@ public class ProviderTest extends AbstractTestNGSpringContextTests {
     @Inject private Service service;
 
     public ProviderTest() {
-        MockInjectionPostProcessor.inject("service", new ServiceMock());
+        ReInjectPostProcessor.inject("service", new ServiceMock());
     }
 
     @Test

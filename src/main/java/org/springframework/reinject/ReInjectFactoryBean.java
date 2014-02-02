@@ -5,11 +5,11 @@ import org.springframework.beans.factory.FactoryBean;
 /**
  * @author Sergey Grigoriev
  */
-public class MockFactoryBean implements FactoryBean {
+public class ReInjectFactoryBean implements FactoryBean {
     private final Object object;
     private final Class objectType;
 
-    public MockFactoryBean(Object object, Class objectType) {
+    public ReInjectFactoryBean(Object object, Class objectType) {
         this.object = object;
         this.objectType = objectType;
     }

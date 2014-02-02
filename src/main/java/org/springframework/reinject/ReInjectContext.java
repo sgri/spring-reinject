@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ReInjectContext {
     @Bean
-    public MockInjectionPostProcessor mockInjectionPostProcessor() {
-        return new MockInjectionPostProcessor();
+    public ReInjectPostProcessor mockInjectionPostProcessor() {
+        return new ReInjectPostProcessor();
     }
 }

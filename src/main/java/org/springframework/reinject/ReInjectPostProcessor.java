@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  * @author Sergey Grigoriev
  */
 @Component
-public class MockInjectionPostProcessor implements BeanFactoryPostProcessor, DisposableBean {
+public class ReInjectPostProcessor implements BeanFactoryPostProcessor, DisposableBean {
     private static final Map<String, Class> mocksByName = new LinkedHashMap<>();
     private static final Map<String, Object> objectsByName = new LinkedHashMap<>();
 
@@ -50,7 +50,7 @@ public class MockInjectionPostProcessor implements BeanFactoryPostProcessor, Dis
                 }
             } else if (objectsByName.containsKey(s)) {
                 GenericBeanDefinition gbd = new GenericBeanDefinition(beanDefinition);
-                gbd.setBeanClass(MockFactoryBean.class);
+                gbd.setBeanClass(ReInjectFactoryBean.class);
                 gbd.setBeanClassName(null);
                 ConstructorArgumentValues constructorArgumentValues = new ConstructorArgumentValues();
                 constructorArgumentValues.addGenericArgumentValue(objectsByName.get(s));
