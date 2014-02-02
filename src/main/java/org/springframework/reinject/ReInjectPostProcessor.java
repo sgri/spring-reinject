@@ -24,7 +24,8 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor, Disposab
 
     /**
      * Replace a bean definition with a another class
-     * @param name bean id
+     *
+     * @param name  bean id
      * @param clazz new class which replaces the original bean definition class
      */
     public static void inject(String name, Class clazz) {
@@ -33,13 +34,14 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor, Disposab
 
     /**
      * Replace a bean definition with a factory bean which returns a pre-instantiated object
-     * @param name bean id
+     *
+     * @param name     bean id
      * @param beanType object type, see {@linkplain org.springframework.beans.factory.FactoryBean#getObjectType()}
-     * @param object bean instance
+     * @param object   bean instance
      */
-    public static void inject(String name, Class  beanType, Object object) {
+    public static void inject(String name, Class beanType, Object object) {
         if (beanType.isAssignableFrom(object.getClass()))
-        objectsByName.put(name, object);
+            objectsByName.put(name, object);
         ConstructorArgumentValues constructorArgumentValues = new ConstructorArgumentValues();
         constructorArgumentValues.addGenericArgumentValue(object);
         constructorArgumentValues.addGenericArgumentValue(beanType);
@@ -55,44 +57,25 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor, Disposab
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        Map<String, BeanDefinition> toRemove = new LinkedHashMap<>();
-        Map<String, BeanDefinition> toAdd = new LinkedHashMap<>();
-        for (String s : beanFactory.getBeanDefinitionNames()) {
-            BeanDefinition beanDefinition = beanFactory.getBeanDefinition(s);
-            if (mocksByName.containsKey(s)) {
-                if (beanDefinition instanceof GenericBeanDefinition)  {
-                    GenericBeanDefinition gbd = (GenericBeanDefinition) beanDefinition;
-                    gbd.setBeanClass(mocksByName.get(s));
-                    toAdd.put(s, gbd);
-                } else {
-                    GenericBeanDefinition gbd = new GenericBeanDefinition(beanDefinition);
-                    gbd.setFactoryBeanName(null);
-                    gbd.setFactoryMethodName(null);
-                    gbd.setBeanClass(mocksByName.get(s));
-                    toAdd.put(s, gbd);
-                    toRemove.put(s, beanDefinition);
+        for (String beanName : beanFactory.getBeanDefinitionNames()) {
+            BeanDefinition bd = beanFactory.getBeanDefinition(beanName);
+            if (mocksByName.containsKey(beanName) || objectsByName.containsKey(beanName)) {
+                GenericBeanDefinition overriddenBd = new GenericBeanDefinition(bd);
+                overriddenBd.setFactoryBeanName(null);
+                overriddenBd.setFactoryMethodName(null);
+                if (mocksByName.containsKey(beanName)) {
+                    overriddenBd.setBeanClass(mocksByName.get(beanName));
+                } else if (objectsByName.containsKey(beanName)) {
+                    overriddenBd.setBeanClassName(ReInjectFactoryBean.class.getName());
+                    overriddenBd.setFactoryBeanName(null);
+                    overriddenBd.setFactoryMethodName(null);
+                    ConstructorArgumentValues constructorArgumentValues = constructorArgsMap.get(beanName);
+                    overriddenBd.setConstructorArgumentValues(constructorArgumentValues);
                 }
-            } else if (objectsByName.containsKey(s)) {
-                GenericBeanDefinition gbd = new GenericBeanDefinition(beanDefinition);
-                gbd.setBeanClassName(ReInjectFactoryBean.class.getName());
-                gbd.setFactoryBeanName(null);
-                gbd.setFactoryMethodName(null);
-                ConstructorArgumentValues constructorArgumentValues = constructorArgsMap.get(s);
-                gbd.setConstructorArgumentValues(constructorArgumentValues);
-                toRemove.put(s, beanDefinition);
-                toAdd.put(s, gbd);
+                BeanDefinitionRegistry bdr = (BeanDefinitionRegistry) beanFactory;
+                bdr.removeBeanDefinition(beanName);
+                bdr.registerBeanDefinition(beanName, overriddenBd);
             }
-        }
-        for (Map.Entry<String, BeanDefinition> entry : toRemove.entrySet()) {
-            BeanDefinitionRegistry bdr = (BeanDefinitionRegistry) beanFactory;
-            String beanName = entry.getKey();
-            bdr.removeBeanDefinition(beanName);
-        }
-
-        for (Map.Entry<String, BeanDefinition> entry : toAdd.entrySet()) {
-            BeanDefinitionRegistry bdr = (BeanDefinitionRegistry) beanFactory;
-            String beanName = entry.getKey();
-            bdr.registerBeanDefinition(beanName, entry.getValue());
         }
     }
 
