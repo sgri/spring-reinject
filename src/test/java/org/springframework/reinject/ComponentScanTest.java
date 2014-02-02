@@ -1,7 +1,6 @@
 package org.springframework.reinject;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,7 +13,7 @@ import org.testng.annotations.Test;
  */
 @ContextConfiguration(classes = {ComponentScanTest.AppContext.class})
 public class ComponentScanTest extends AbstractTestNGSpringContextTests{
-    @Inject private Service service;
+    @Autowired private Service service;
 
     public ComponentScanTest() {
         ReInjectPostProcessor.inject("service", ServiceMock.class);
