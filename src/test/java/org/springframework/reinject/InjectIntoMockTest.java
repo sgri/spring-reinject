@@ -37,7 +37,7 @@ public class InjectIntoMockTest {
     @Configuration
     static class InjectIntoMockTestContext {
         @Bean
-        public Service service() {
+        public  Service service() {
             return new ServiceImpl();
         }
 
