@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MockInjectionPostProcessor implements BeanFactoryPostProcessor, DisposableBean {
-    private static MockInjectionPostProcessor instance;
     private static final Map<String, Class> mocksByName = new LinkedHashMap<>();
     private static final Map<String, Provider> providersByName = new LinkedHashMap<>();
 
