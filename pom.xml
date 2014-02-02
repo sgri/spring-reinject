@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.sprinframework</groupId>
+    <groupId>org.springframework</groupId>
     <artifactId>reinject</artifactId>
     <packaging>jar</packaging>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <name>ReInject</name>
     <description>Injection of mocks into Spring application context</description>
     <licenses>
@@ -18,6 +18,17 @@
     <properties>
         <springVersion>3.2.4.RELEASE</springVersion>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>file</id>
+            <name>local file</name>
+            <url>file:./release</url>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
