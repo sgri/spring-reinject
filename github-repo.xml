@@ -24,6 +24,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-reinject</artifactId>
             <version>0.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
