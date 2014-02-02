@@ -68,8 +68,6 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor {
                     overriddenBd.setBeanClass(mocksByName.get(beanName));
                 } else if (objectsByName.containsKey(beanName)) {
                     overriddenBd.setBeanClassName(ReInjectFactoryBean.class.getName());
-                    overriddenBd.setFactoryBeanName(null);
-                    overriddenBd.setFactoryMethodName(null);
                     ConstructorArgumentValues constructorArgumentValues = constructorArgsMap.get(beanName);
                     overriddenBd.setConstructorArgumentValues(constructorArgumentValues);
                 }
