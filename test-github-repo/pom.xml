@@ -10,6 +10,21 @@
     <artifactId>reinject-github-repo</artifactId>
     <name>Test connectivity to GitHub repo</name>
 
+    <repositories>
+        <repository>
+            <id>reinject</id>
+            <name>reinject</name>
+            <url>https://github.com/sgri/reinject/raw/master</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
