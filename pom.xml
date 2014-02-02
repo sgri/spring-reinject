@@ -5,7 +5,7 @@
     <artifactId>reinject</artifactId>
     <packaging>jar</packaging>
     <version>0.1-SNAPSHOT</version>
-    <name>SpringMock</name>
+    <name>ReInject</name>
     <description>Injection of mocks into Spring application context</description>
     <properties>
         <springVersion>3.2.4.RELEASE</springVersion>
