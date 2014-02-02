@@ -20,13 +20,18 @@ import org.springframework.stereotype.Component;
 public class ReInjectPostProcessor implements BeanFactoryPostProcessor, DisposableBean {
     private static final Map<String, Class> mocksByName = new LinkedHashMap<>();
     private static final Map<String, Object> objectsByName = new LinkedHashMap<>();
+    private static final Map<String, ConstructorArgumentValues> constructorArgsMap = new LinkedHashMap<>();
 
     public static void inject(String name, Class clazz) {
         mocksByName.put(name, clazz);
     }
 
-    public static <T> void inject(String name, Object object) {
+    public static <T> void inject(String name, Class ifc, Object object) {
         objectsByName.put(name, object);
+        ConstructorArgumentValues constructorArgumentValues = new ConstructorArgumentValues();
+        constructorArgumentValues.addGenericArgumentValue(object);
+        constructorArgumentValues.addGenericArgumentValue(ifc);
+        constructorArgsMap.put(name, constructorArgumentValues);
     }
 
     @Override
@@ -50,11 +55,11 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor, Disposab
                 }
             } else if (objectsByName.containsKey(s)) {
                 GenericBeanDefinition gbd = new GenericBeanDefinition(beanDefinition);
-                gbd.setBeanClass(ReInjectFactoryBean.class);
-                gbd.setBeanClassName(null);
-                ConstructorArgumentValues constructorArgumentValues = new ConstructorArgumentValues();
-                constructorArgumentValues.addGenericArgumentValue(objectsByName.get(s));
-                constructorArgumentValues.addGenericArgumentValue(null);
+                gbd.setBeanClassName(ReInjectFactoryBean.class.getName());
+                gbd.setFactoryBeanName(null);
+                gbd.setFactoryMethodName(null);
+                ConstructorArgumentValues constructorArgumentValues = constructorArgsMap.get(s);
+                gbd.setConstructorArgumentValues(constructorArgumentValues);
                 toRemove.put(s, beanDefinition);
                 toAdd.put(s, gbd);
             }
@@ -75,5 +80,7 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor, Disposab
     @Override
     public void destroy() throws Exception {
         mocksByName.clear();
+        objectsByName.clear();
+        constructorArgsMap.clear();
     }
 }
