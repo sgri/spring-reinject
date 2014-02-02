@@ -14,7 +14,7 @@
         <repository>
             <id>reinject</id>
             <name>reinject</name>
-            <url>https://github.com/sgri/reinject/raw/master</url>
+            <url>https://github.com/sgri/reinject/raw/master/release</url>
             <layout>default</layout>
             <snapshots>
                 <enabled>true</enabled>
