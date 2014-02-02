@@ -14,13 +14,13 @@ import org.testng.annotations.Test;
 /**
  * @author Sergey Grigoriev
  */
-@ContextConfiguration(classes = {ReInjectContext.class, ProviderTest.ProviderTestContext.class})
-public class ProviderTest extends AbstractTestNGSpringContextTests {
+@ContextConfiguration(classes = {ReInjectContext.class, InjectObjectTest.ProviderTestContext.class})
+public class InjectObjectTest extends AbstractTestNGSpringContextTests {
 
     @Inject @Named("service1") private Service service1;
     @Inject @Named("service2") private Service service2;
 
-    public ProviderTest() {
+    public InjectObjectTest() {
         ReInjectPostProcessor.inject("service1",Service.class, new ServiceMock() {
             @Override
             public String hello() {
