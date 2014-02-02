@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ReInjectPostProcessor implements BeanFactoryPostProcessor {
-    private static final Map<String, Class> mocksByName = new LinkedHashMap<>();
+    private static final Map<String, Class> classesByName = new LinkedHashMap<>();
     private static final Map<String, Object> objectsByName = new LinkedHashMap<>();
     private static final Map<String, ConstructorArgumentValues> constructorArgsMap = new LinkedHashMap<>();
 
@@ -28,7 +28,7 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor {
      * @param clazz new class which replaces the original bean definition class
      */
     public static void inject(String name, Class clazz) {
-        mocksByName.put(name, clazz);
+        classesByName.put(name, clazz);
     }
 
     /**
@@ -60,12 +60,12 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor {
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         for (String beanName : beanFactory.getBeanDefinitionNames()) {
             BeanDefinition bd = beanFactory.getBeanDefinition(beanName);
-            if (mocksByName.containsKey(beanName) || objectsByName.containsKey(beanName)) {
+            if (classesByName.containsKey(beanName) || objectsByName.containsKey(beanName)) {
                 GenericBeanDefinition overriddenBd = new GenericBeanDefinition(bd);
                 overriddenBd.setFactoryBeanName(null);
                 overriddenBd.setFactoryMethodName(null);
-                if (mocksByName.containsKey(beanName)) {
-                    overriddenBd.setBeanClass(mocksByName.get(beanName));
+                if (classesByName.containsKey(beanName)) {
+                    overriddenBd.setBeanClass(classesByName.get(beanName));
                 } else if (objectsByName.containsKey(beanName)) {
                     overriddenBd.setBeanClassName(ReInjectFactoryBean.class.getName());
                     ConstructorArgumentValues constructorArgumentValues = constructorArgsMap.get(beanName);
@@ -80,7 +80,7 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor {
     }
 
     private void cleanup()  {
-        mocksByName.clear();
+        classesByName.clear();
         objectsByName.clear();
         constructorArgsMap.clear();
     }
