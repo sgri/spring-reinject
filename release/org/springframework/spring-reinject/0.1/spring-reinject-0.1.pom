@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework</groupId>
-    <artifactId>reinject-parent</artifactId>
     <version>0.1</version>
-    <name>Shared build settings</name>
-    <packaging>pom</packaging>
+    <artifactId>spring-reinject</artifactId>
 
+    <name>Spring Re-inject</name>
+    <description>Injection of mocks into Spring application context</description>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -15,20 +15,21 @@
             <comments>A business-friendly OSS license</comments>
         </license>
     </licenses>
-    <properties>
-        <springVersion>3.2.4.RELEASE</springVersion>
-    </properties>
 
     <distributionManagement>
         <repository>
             <uniqueVersion>false</uniqueVersion>
             <id>file</id>
             <name>local file</name>
-            <url>file:./release</url>
+            <url>file:release</url>
             <layout>default</layout>
         </repository>
     </distributionManagement>
 
+
+    <properties>
+        <springVersion>3.2.4.RELEASE</springVersion>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -80,6 +81,43 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <pluginManagement>
             <plugins>

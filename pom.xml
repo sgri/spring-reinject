@@ -21,7 +21,7 @@
             <uniqueVersion>false</uniqueVersion>
             <id>file</id>
             <name>local file</name>
-            <url>file:../release</url>
+            <url>file:release</url>
             <layout>default</layout>
         </repository>
     </distributionManagement>

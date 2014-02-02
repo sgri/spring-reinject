@@ -9,7 +9,7 @@
         <repository>
             <id>reinject</id>
             <name>reinject</name>
-            <url>https://github.com/sgri/reinject/raw/master/release</url>
+            <url>https://github.com/sgri/spring-reinject/raw/master/release</url>
             <layout>default</layout>
             <snapshots>
                 <enabled>true</enabled>
@@ -22,7 +22,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>reinject</artifactId>
+            <artifactId>spring-reinject</artifactId>
             <version>0.1</version>
         </dependency>
     </dependencies>
