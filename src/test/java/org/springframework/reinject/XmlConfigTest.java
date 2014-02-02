@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/org/springframework/reinject/app-context.xml", "classpath:/org/springframework/reinject/test-context.xml"})
+@ContextConfiguration(locations = {"classpath:/org/springframework/reinject/app-context.xml", "classpath:/org/springframework/reinject/reinject-context.xml"})
 public class XmlConfigTest  {
     @Inject private Printer printer;
 
