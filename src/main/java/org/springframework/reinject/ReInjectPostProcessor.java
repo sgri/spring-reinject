@@ -3,8 +3,9 @@ package org.springframework.reinject;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @author Sergey Grigoriev
  */
 @Component
-public class ReInjectPostProcessor implements BeanFactoryPostProcessor, DisposableBean {
+public class ReInjectPostProcessor implements BeanFactoryPostProcessor {
     private static final Map<String, Class> mocksByName = new LinkedHashMap<>();
     private static final Map<String, Object> objectsByName = new LinkedHashMap<>();
     private static final Map<String, ConstructorArgumentValues> constructorArgsMap = new LinkedHashMap<>();
@@ -81,8 +82,8 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor, Disposab
         }
     }
 
-    @Override
-    public void destroy() throws Exception {
+    @PreDestroy
+    public void cleanup()  {
         mocksByName.clear();
         objectsByName.clear();
         constructorArgsMap.clear();
