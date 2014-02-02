@@ -3,8 +3,6 @@ package org.springframework.reinject;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.annotation.PreDestroy;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -80,10 +78,10 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor {
                 bdr.registerBeanDefinition(beanName, overriddenBd);
             }
         }
+        cleanup();
     }
 
-    @PreDestroy
-    public void cleanup()  {
+    private void cleanup()  {
         mocksByName.clear();
         objectsByName.clear();
         constructorArgsMap.clear();
