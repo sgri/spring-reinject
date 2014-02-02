@@ -1,12 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <relativePath>../spring-reinject-parent</relativePath>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-reinject-parent</artifactId>
-        <version>0.1</version>
-    </parent>
+    <groupId>org.springframework</groupId>
+    <version>0.1</version>
     <artifactId>spring-reinject</artifactId>
 
     <name>Spring Re-inject</name>
@@ -122,7 +118,7 @@
             <artifactId>log4j</artifactId>
         </dependency>
     </dependencies>
-<build>
+    <build>
         <pluginManagement>
             <plugins>
                 <plugin>
