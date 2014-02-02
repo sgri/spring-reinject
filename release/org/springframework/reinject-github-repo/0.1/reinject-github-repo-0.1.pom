@@ -7,33 +7,23 @@
         <artifactId>reinject-parent</artifactId>
         <version>0.1</version>
     </parent>
-    <artifactId>reinject</artifactId>
+    <artifactId>reinject-github-repo</artifactId>
+    <name>Test connectivity to GitHub repo</name>
 
-    <name>ReInject</name>
-    <description>Injection of mocks into Spring application context</description>
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
-        </license>
-    </licenses>
-
-    <distributionManagement>
+    <repositories>
         <repository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>file</id>
-            <name>local file</name>
-            <url>file:../release</url>
+            <id>reinject</id>
+            <name>reinject</name>
+            <url>https://github.com/sgri/reinject/raw/master</url>
             <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <updatePolicy>always</updatePolicy>
+            </releases>
         </repository>
-    </distributionManagement>
-
-
-    <properties>
-        <springVersion>3.2.4.RELEASE</springVersion>
-    </properties>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -60,8 +50,6 @@
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>1</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -70,6 +58,11 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>reinject</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

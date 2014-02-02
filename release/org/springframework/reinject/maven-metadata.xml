@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <groupId>org.sprinframework</groupId>
+  <groupId>org.springframework</groupId>
   <artifactId>reinject</artifactId>
   <versioning>
     <release>0.1</release>
     <versions>
       <version>0.1</version>
     </versions>
-    <lastUpdated>20140202114503</lastUpdated>
+    <lastUpdated>20140202125713</lastUpdated>
   </versioning>
 </metadata>
