@@ -45,7 +45,7 @@
             <artifactId>log4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.sprinframework</groupId>
+            <groupId>org.springframework</groupId>
             <artifactId>reinject</artifactId>
             <version>${project.version}</version>
         </dependency>
