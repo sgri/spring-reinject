@@ -1,4 +1,4 @@
-reinject
+Re-inject
 ========
 
 Inject mocks into Spring application context easily
