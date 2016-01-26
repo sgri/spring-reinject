@@ -1,5 +1,8 @@
 package org.springframework.reinject;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.ApplicationContext;
@@ -38,4 +41,18 @@ class ReInjectFactoryBean implements FactoryBean, ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
+    
+    /**
+     * Stub implementation to allow re-injecting maps
+     */
+    public void setSourceMap(Map<?, ?> sourceMap) {
+		// no-op
+	}
+    
+    /**
+     * Stub implementation to allow re-injecting lists
+     */
+    public void setSourceList(List<?> sourceList) {
+		// no-op
+	}
 }
