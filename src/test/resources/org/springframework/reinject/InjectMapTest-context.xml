@@ -7,6 +7,6 @@
 
     <bean class="org.springframework.reinject.ReInjectPostProcessor"/>
     
-    <util:map id="stringStringMap" />
+    <util:map id="injectedMap" />
 </beans>
 

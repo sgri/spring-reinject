@@ -1,32 +1,33 @@
 package org.springframework.reinject;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.MapFactoryBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import junit.framework.Assert;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
+@ContextConfiguration(locations = {"classpath:/org/springframework/reinject/reinject-context.xml", "classpath:/org/springframework/reinject/InjectMapTest-context.xml"})
 @DirtiesContext
 public class InjectMapTest {
 	
-	private static final String BEAN_NAME = "stringStringMap";
+	private static final String BEAN_NAME = "injectedMap";
 
 	private static final String STUB_KEY_1 = "MESA.KEY";
 
 	private static final String STUB_VALUE_1 = "JarJar says hello";
 
-	@Autowired
-	private ApplicationContext applicationContext;
-	
+	@Autowired @Qualifier(BEAN_NAME) MapFactoryBean injectedMap;
+
 	private Map<String, String> mapStub = new HashMap<>();
 	
 	public InjectMapTest() {
@@ -35,12 +36,8 @@ public class InjectMapTest {
 	}
 	
 	@Test
-	public void testInjectMap() throws Exception {
-		@SuppressWarnings("unchecked")
-		Map<String, String> actualMap = (Map<String, String>) applicationContext.getBean(BEAN_NAME);
-		String actual = actualMap.get(STUB_KEY_1);
-		String expected = STUB_VALUE_1;
-		Assert.assertEquals(expected, actual);
+	public void injectMap() throws Exception {
+		assertEquals(mapStub, injectedMap.getObject());
 	}
 
 }

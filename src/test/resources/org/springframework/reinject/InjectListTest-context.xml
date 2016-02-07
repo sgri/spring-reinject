@@ -7,6 +7,10 @@
 
     <bean class="org.springframework.reinject.ReInjectPostProcessor"/>
     
-    <util:list id="stringList" />
+    <util:list id="injectedList" >
+		<value type="java.lang.String">1</value>
+		<value type="java.lang.String">2</value>
+		<value type="java.lang.String">3</value>
+	</util:list>
 </beans>
 

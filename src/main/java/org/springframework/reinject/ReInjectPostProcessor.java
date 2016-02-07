@@ -1,16 +1,15 @@
 package org.springframework.reinject;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.ConstructorArgumentValues;
+import org.springframework.beans.PropertyValue;
+import org.springframework.beans.factory.config.*;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.stereotype.Component;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Sergey Grigoriev
@@ -67,9 +66,30 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor {
                 if (classesByName.containsKey(beanName)) {
                     overriddenBd.setBeanClass(classesByName.get(beanName));
                 } else if (objectsByName.containsKey(beanName)) {
-                    overriddenBd.setBeanClassName(ReInjectFactoryBean.class.getName());
-                    ConstructorArgumentValues constructorArgumentValues = constructorArgsMap.get(beanName);
-                    overriddenBd.setConstructorArgumentValues(constructorArgumentValues);
+                    if (ListFactoryBean.class.getName().equals(bd.getBeanClassName())) {
+                        final PropertyValue originalProp = bd.getPropertyValues().getPropertyValue("sourceList");
+                        int index = overriddenBd.getPropertyValues().getPropertyValueList().indexOf(originalProp);
+                        final Object reInjectedObject = objectsByName.get(beanName);
+                        if (!List.class.isAssignableFrom(reInjectedObject.getClass())) {
+                            throw new IllegalArgumentException();
+                        }
+                        PropertyValue modifiedProp = new PropertyValue(originalProp.getName(), reInjectedObject);
+                        overriddenBd.getPropertyValues().setPropertyValueAt(modifiedProp, index);
+                    } else if (MapFactoryBean.class.getName().equals(bd.getBeanClassName())) {
+                        final PropertyValue originalProp = bd.getPropertyValues().getPropertyValue("sourceMap");
+                        int index = overriddenBd.getPropertyValues().getPropertyValueList().indexOf(originalProp);
+                        final Object reInjectedObject = objectsByName.get(beanName);
+                        if (!Map.class.isAssignableFrom(reInjectedObject.getClass())) {
+                            throw new IllegalArgumentException();
+                        }
+                        PropertyValue modifiedProp = new PropertyValue(originalProp.getName(), reInjectedObject);
+                        overriddenBd.getPropertyValues().setPropertyValueAt(modifiedProp, index);
+                    }
+                    else {
+                        overriddenBd.setBeanClassName(ReInjectFactoryBean.class.getName());
+                        ConstructorArgumentValues constructorArgumentValues = constructorArgsMap.get(beanName);
+                        overriddenBd.setConstructorArgumentValues(constructorArgumentValues);
+                    }
                 }
                 BeanDefinitionRegistry bdr = (BeanDefinitionRegistry) beanFactory;
                 bdr.removeBeanDefinition(beanName);
@@ -79,7 +99,7 @@ public class ReInjectPostProcessor implements BeanFactoryPostProcessor {
         cleanup();
     }
 
-    private void cleanup()  {
+    private void cleanup() {
         classesByName.clear();
         objectsByName.clear();
         constructorArgsMap.clear();
