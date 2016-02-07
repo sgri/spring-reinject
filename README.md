@@ -36,7 +36,7 @@ Your mock becomes a Spring bean, it means that it can have auto-wired fields lik
    <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-reinject</artifactId>
-        <version>0.2</version>
+        <version>0.3</version>
         <scope>test</scope>
         <exclusions>
                 <exclusion>
