@@ -3,11 +3,12 @@
   <groupId>org.springframework</groupId>
   <artifactId>spring-reinject</artifactId>
   <versioning>
-    <release>0.2</release>
+    <release>0.3</release>
     <versions>
       <version>0.1</version>
       <version>0.2</version>
+      <version>0.3</version>
     </versions>
-    <lastUpdated>20140202220111</lastUpdated>
+    <lastUpdated>20160207111033</lastUpdated>
   </versioning>
 </metadata>
