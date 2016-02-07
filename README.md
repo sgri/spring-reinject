@@ -13,7 +13,7 @@ Spring Re-inject is not designed for contexts when all  objects are mocks. It is
 ## How it works
 You add a special bean factory post-processor to your application context. Then you register your mocks in your test's constructor. Then Spring constructs an application context for your test case, and the post-processor replaces bean definitions with new bean definitions which refer to mocks. Original beans are never created. 
 
-Your mock becomes a Spring bean, it means that it can have auto-wired fields like a normal spring bean!
+Your mock becomes a Spring bean, it means that it can have auto-wired fields like a normal bean!
 
 
 ## Add a Maven dependency
